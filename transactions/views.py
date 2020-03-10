@@ -61,7 +61,7 @@ def check_transaction(request):
             t.delete()
     except Exception as exp:
         print(exp)
-    return redirect("/dashboard")
+    return redirect("https://wasche-services.herokuapp.com/dashboard")
 
 def createOrderId(em,plan,amount):
     t = Transaction(customer_email = em,customer_name=em.first_name+" "+em.last_name,customer_phone_number=em.phone_number,plan = plan,amount = amount,eligibility = json.dumps(cust_set.plan[plan]["details"]))
