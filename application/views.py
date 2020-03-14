@@ -234,8 +234,8 @@ def logout(request):
     try:
         data = json.loads(data)
         u = User.objects.get(email=data["e"])
-        u.is_active = False
-        u.save()
+##        u.is_active = False
+##        u.save()
         onesig_u = OneSignal.objects.filter(email=u)
         for oneuu in onesig_u:
             if oneuu.pid==opid:
