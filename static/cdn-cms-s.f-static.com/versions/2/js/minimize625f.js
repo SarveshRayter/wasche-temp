@@ -30638,10 +30638,19 @@ $('.top-logout-btn').on('click',function(){
         onesignal.setSubscription(false);
         console.log("changed");
     }
-    setTimeout(function(){
+    //setTimeout(function(){
 
-        location.href = "/ajax/logout/";
-    },3000);
+//        location.href = "/ajax/logout/";
+  //  },3000);
+
+OneSignal.setSubscription(false);
+		setTimeout(function(){
+			OneSignal.getUserId( function(userId) {
+        location.href = "/ajax/logout?oid="+userId;
+});
+
+		},3000);
+
     //  $.ajax({
     //         type: "POST",
     //         url: '/ajax/logout/',
