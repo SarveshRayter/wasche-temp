@@ -206,8 +206,11 @@ def login(request):
                 
                 import urllib.parse
                 onesig_u = OneSignal.objects.filter(email=u)
+                pid = urllib.parse.unquote(request.POST["os"])
+                print("\n\n",pid)
                 for oneuu in onesig_u:
-                    if oneuu.type_os==urllib.parse.unquote(request.POST["os"]):
+                    print("\n\n",oneuu.type_os,"\n\n")
+                    if oneuu.type_os==pid:
                         oneuu.is_active=True
                         print("\n\nModified onesignal\n\n")
                         oneuu.save()
