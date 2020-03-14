@@ -30642,15 +30642,15 @@ $('.top-logout-btn').on('click',function(){
 
 //        location.href = "/ajax/logout/";
   //  },3000);
-var ouid=False;
+var ouid=false;
 OneSignal.setSubscription(false);
 		setTimeout(function(){
 			OneSignal.getUserId( function(userId) {
-ouid = True;
+ouid = true;
         location.href = "/ajax/logout?oid="+userId;
 });
 setTimeout(function(){
-if(ouid==False){
+if(ouid==false){
 location.href = "/ajax/logout/";
 }
 },3000);
