@@ -228,9 +228,11 @@ def onsignal(request):
 def logout(request):
     print("logging out")
     opid = request.GET["oid"]
-    print(opid)
+    print(opid,request.user.email)
+    data = check_cookie(request)
     try:
-        u = User.objects.get(email=request.user.email)
+        data = json.loads(data)
+        u = User.objects.get(email=data["e"])
         u.is_active = False
         u.save()
         onesig_u = OneSignal.objects.filter(email=i)
@@ -238,8 +240,8 @@ def logout(request):
             if oneuu.pid==opid:
                 oneuu.is_active=False
                 oneuu.save()
-    except:
-        print("Error")
+    except Exception as exp:
+        print("Error :  ",exp)
     response = HttpResponseRedirect("/u/")
     response.delete_cookie("wasche")
     return response
