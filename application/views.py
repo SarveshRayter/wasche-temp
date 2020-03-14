@@ -228,10 +228,11 @@ def onsignal(request):
 def logout(request):
     print("logging out")
     print(request.GET)
-    opid = request.GET["oid"]
-    print(opid)
+    
     data = check_cookie(request)
     try:
+        opid = request.GET["oid"]
+        print(opid)
         data = json.loads(data)
         u = User.objects.get(email=data["e"])
 ##        u.is_active = False
