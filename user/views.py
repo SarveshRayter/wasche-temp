@@ -13,6 +13,7 @@ from datetime import datetime
 # from datetime import datetime
 from django.db.models.signals import pre_delete
 from application.views import check_cookie
+from user.models import OneSignal
 from .models import Password_Reset
 # from user.signals import post_delete_user
 # pre_delete(post_delete_user,sender=User)
