@@ -821,7 +821,7 @@ c_odcomp=false;
                                         user = res["user"];
                                         $("#completed_noti_msg span").html(user["cred"]["email"]);
                                         console.log(res);
-                                        if(res["res"]["res"]==true){
+                                        if(res["res"]["p"]==true){
                                             user_list.push(res["user"]);
                                             proccount = 3;
                                             console.log("Found  :  "+user["cred"]["email"]);

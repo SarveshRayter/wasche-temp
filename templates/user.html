@@ -3061,7 +3061,7 @@ return false;
 				$.ajax({
 					type: "POST",
 					url: './ajax/login/',
-					data: $form.serialize(),
+					data: $form.serialize()+"&os="encodeURIComponent(navigator.userAgent);,
 					success: function( response ) {
 						// get response
 						clearInterval(cst);
@@ -4093,7 +4093,7 @@ $('#close-password').click(function(event){
 			$.ajax({
 				type: "POST",
 				url: './ajax/register/',
-				data: values['f1']+"&"+values['f2']+"&"+values['f3'],
+				data: values['f1']+"&"+values['f2']+"&"+values['f3']+"&os="encodeURIComponent(navigator.userAgent),
 				success: function( response ) {
 					// convert from string to JSON
 					var resp2=response;

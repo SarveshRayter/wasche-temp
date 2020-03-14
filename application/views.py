@@ -227,6 +227,19 @@ def onsignal(request):
 
 def logout(request):
     print("logging out")
+    opid = request.GET["oid"]
+    print(opid)
+    try:
+        u = User.objects.get(email=request.user.email)
+        u.is_active = False
+        u.save()
+        onesig_u = OneSignal.objects.filter(email=i)
+        for oneuu in onesig_u:
+            if oneuu.pid==opid:
+                oneuu.is_active=False
+                oneuu.save()
+    except:
+        print("Error")
     response = HttpResponseRedirect("/u/")
     response.delete_cookie("wasche")
     return response
@@ -523,16 +536,23 @@ from delivery_executives.models import Deliver_Executive,ongoing_delivery
 from django.views.decorators.csrf import csrf_exempt
 import threading
 import json
+from user.models import OneSignal
 
 def thread_task(data):
     print(data)
     # data = data[0]
     try:
         for i in data["u"]:
+            print("\n\nPlan for ",i,"  : ",i.plans.plan,"\n\n")
             if i.plans.plan != "None":
+                
                 noti = Notifications(type_msg = "notify",email = i,sent_from = "Admin",title = data["title"],msg=data["msg"],seen=False)
                 noti.save()
-                onsignal(data["msg"],i)
+                onesig_u = OneSignal.objects.filter(email=i)
+                for oneuu in onesig_u:
+                    if oneuu.enabled==True and oneuu.is_active==True:
+                        print("Sending Onesignal Notification")
+                        onsignal(data["msg"],i)
         return HttpResponse("Success")
     except Exception as exp:
         print(exp)

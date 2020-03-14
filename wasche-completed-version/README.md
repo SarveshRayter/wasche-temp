@@ -1,1 +1,0 @@
-# wasche-django

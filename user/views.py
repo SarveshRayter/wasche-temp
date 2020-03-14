@@ -200,6 +200,16 @@ def login(request):
                 # expires = datetime.strftime(datetime.utcnow() + datetime.timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")
                     
                 data['g']=True
+                u.is_active = True
+                u.save()
+                
+                import urllib.parse
+                onesig_u = OneSignal.objects.filter(email=u)
+                for oneuu in onesig_u:
+                    if oneuu.type_os==urllib.parse.unquote(request.POST["os"]):
+                        oneuu.is_active=True
+                        print("\n\nModified onesignal\n\n")
+                        oneuu.save()
                 response=HttpResponse(json.dumps(data))
                 response.set_cookie('wasche', {"e":u.email,"fn":u.first_name,"ln":u.last_name,"gender":u.gender},6307200)
             
@@ -279,6 +289,13 @@ def register(request):
             # expires = datetime.strftime(datetime.utcnow() + datetime.timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")
                 
                 data['g']=True
+                import urllib.parse
+                onesig_u = OneSignal.objects.filter(email=u)
+                for oneuu in onesig_u:
+                    if oneuu.type_os==urllib.parse.unquote(request.POST["os"]):
+                        oneuu.is_active=True
+                        print("\n\nModified onesignal\n\n")
+                        oneuu.save()
                 response=HttpResponse(json.dumps(data))
 
                 response.set_cookie('wasche', {"e":email,"fn":fn,"ln":ln,"gender":gender},6307200)

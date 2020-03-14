@@ -48,6 +48,7 @@ class OneSignalAdmin(admin.ModelAdmin):
         'pid',
         'enabled',
         'type_os',
+        'is_active',
         'date_created',
     )
 @admin.register(Notifications)

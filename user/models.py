@@ -136,6 +136,7 @@ class OneSignal(models.Model):
     pid = models.CharField(max_length=254,default="")
     enabled = models.BooleanField(default=True)
     type_os = models.CharField(max_length=254,default="")
+    is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(editable=False)
     def __str__(self):
         return self.email.email
