@@ -3061,7 +3061,7 @@ return false;
 				$.ajax({
 					type: "POST",
 					url: './ajax/login/',
-					data: $form.serialize()+"&os="+encodeURIComponent(navigator.userAgent);,
+					data: $form.serialize()+"&os="+encodeURIComponent(navigator.userAgent),
 					success: function( response ) {
 						// get response
 						clearInterval(cst);
